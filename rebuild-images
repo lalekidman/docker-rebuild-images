@@ -1,0 +1,17 @@
+#!/bin/bash
+
+#echo "display all params";
+#loop until all params are used
+while [ "$1" != "" ]; do
+        images="$images $1";
+#       echo "params 1 equal {$1}."
+#       echo "you now have $# position"
+        shift
+done
+
+#echo "## rebuild and rebuild images: $images";
+docker-compose pull $images
+docker-compose stop $images
+docker-compose rm -f $images
+docker-compose up -d $images
+
